@@ -6,7 +6,8 @@ sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again p
 sudo aptitude update
 sudo aptitude -y -q=2 upgrade
 sudo aptitude install -y -q=2 build-essential git cvs git-core libcurl3 \
-libcurl3-gnutls libcurl4-openssl-dev mysql-server mysql-client libmysqlclient-dev
+libcurl3-gnutls libcurl4-openssl-dev mysql-server mysql-client libmysqlclient-dev \
+libzmq3 libzmq3-dev
 
 echo "--- INSTALLING MYSQL ---"
 # # https://github.com/AlexDisler/mysql-vagrant/blob/master/install.sh
@@ -38,8 +39,9 @@ source /usr/share/asdf/asdf.sh
 
 echo "--- INSTALLING NODEJS ---"
 asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git
-asdf install nodejs 6.6.0
-asdf global nodejs 6.6.0
+asdf install nodejs 6.5.0
+asdf global nodejs 6.5.0
+npm install esprima -g
 
 echo "OKAY - GOING TO INSTALL OUR OWN THINGS NOW"
 
@@ -59,7 +61,6 @@ cd /vagrant
 git clone https://github.com/FarmBot/mqtt-gateway.git
 cd mqtt-gateway
 echo "Npm installing"
-npm install escodegen
 npm install esprima
 npm install
 
@@ -68,6 +69,5 @@ cd /vagrant
 git clone https://github.com/FarmBot/farmbot-web-frontend.git
 cd farmbot-web-frontend
 echo "Npm installing"
-npm install escodegen
 npm install esprima
 npm install
