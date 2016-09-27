@@ -20,16 +20,16 @@ mysql -u root -ppassword -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIE
 mysql -u root -ppassword -e "CREATE DATABASE farmbot_api_dev;"
 sudo service mysql restart
 
-# echo "--- INSTALLING RVM ---"
-# gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
-# curl -sSL https://get.rvm.io | bash -s stable --quiet-curl --ruby=2.3.1
-#
-# echo "--- INSTALLING RUBY 2.3.1 ---"
-# sudo apt-get install -f
-# source /home/vagrant/.rvm/scripts/rvm
-# rvm reload
-# rvm use 2.3.1
-# gem install bundler
+echo "--- INSTALLING RVM ---"
+gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+curl -sSL https://get.rvm.io | bash -s stable --quiet-curl --ruby=2.3.1
+
+echo "--- INSTALLING RUBY 2.3.1 ---"
+sudo apt-get install -f
+source /home/vagrant/.rvm/scripts/rvm
+rvm reload
+rvm use 2.3.1
+gem install bundler
 
 echo "--- INSTALLING ASDF ---"
 sudo mkdir /usr/share/asdf
@@ -61,13 +61,11 @@ cd /vagrant
 git clone https://github.com/FarmBot/mqtt-gateway.git
 cd mqtt-gateway
 echo "Npm installing"
-npm install esprima
-npm install
+npm install --no-bin-links
 
 echo "--- INSTALLING WEB FRONTEND ---"
 cd /vagrant
 git clone https://github.com/FarmBot/farmbot-web-frontend.git
 cd farmbot-web-frontend
 echo "Npm installing"
-npm install esprima
 npm install
