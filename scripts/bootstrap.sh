@@ -3,10 +3,11 @@
 sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password password password'
 sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password password'
 
+sudo apt-get install aptitude
 sudo aptitude update
 sudo aptitude -y -q=2 upgrade
-sudo aptitude install -y -q=2 build-essential git cvs git-core libcurl3 \
-libcurl3-gnutls libcurl4-openssl-dev mysql-server mysql-client libmysqlclient-dev \
+sudo aptitude install -y -q=2 build-essential wget curl git cvs git-core libcurl3 \
+libcurl3-gnutls libcurl4-openssl-dev mysql-server mysql-client libmysqlclient-dev libpq-dev \
 libzmq3 libzmq3-dev
 
 echo "--- INSTALLING MYSQL ---"
@@ -22,13 +23,13 @@ sudo service mysql restart
 
 echo "--- INSTALLING RVM ---"
 gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
-curl -sSL https://get.rvm.io | bash -s stable --quiet-curl --ruby=2.3.1
+curl -sSL https://get.rvm.io | bash -s stable --quiet-curl --ruby=2.3.3
 
-echo "--- INSTALLING RUBY 2.3.1 ---"
+echo "--- INSTALLING RUBY 2.3.3 ---"
 sudo apt-get install -f
 source /home/vagrant/.rvm/scripts/rvm
 rvm reload
-rvm use 2.3.1
+rvm use 2.3.3
 gem install bundler
 
 echo "--- INSTALLING ASDF ---"
@@ -39,8 +40,8 @@ source /usr/share/asdf/asdf.sh
 
 echo "--- INSTALLING NODEJS ---"
 asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git
-asdf install nodejs 6.5.0
-asdf global nodejs 6.5.0
+asdf install nodejs 6.9.2
+asdf global nodejs 6.9.2
 npm install esprima -g
 
 echo "OKAY - GOING TO INSTALL OUR OWN THINGS NOW"
