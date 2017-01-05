@@ -19,7 +19,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.network :forwarded_port, guest: 80, host: 3002
   config.vm.network :forwarded_port, guest: 1883, host: 1883
   config.vm.network :forwarded_port, guest: 9200, host: 9201
-  config.vm.network auto_config: false
+
   config.vm.synced_folder ".", "/vagrant", :mount_options => ["dmode=777", "fmode=666"]
 
   config.vm.provision :shell, path: "scripts/bootstrap.sh", privileged: false
