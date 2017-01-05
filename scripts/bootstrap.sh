@@ -1,4 +1,4 @@
-#-*- coding: utf-8 -*-
+#-*- coding: en_US.UTF-8 -*-
 #!/usr/bin/env bash
 sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password password password'
 sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password password'
@@ -23,14 +23,14 @@ sudo service mysql restart
 
 echo "--- INSTALLING RVM ---"
 gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
-curl -sSL https://get.rvm.io | bash -s stable --quiet-curl --ruby=2.3.3
+curl -sSL https://get.rvm.io | bash -s stable
 
 echo "--- INSTALLING RUBY 2.3.3 ---"
 sudo apt-get install -f
 source /home/vagrant/.rvm/scripts/rvm
 rvm reload
-rvm use 2.3.3
-gem install bundler
+rvm install ruby-2.3.3 --default
+gem install bundler 
 
 echo "--- INSTALLING ASDF ---"
 sudo mkdir /usr/share/asdf
@@ -43,12 +43,15 @@ asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git
 asdf install nodejs 6.9.2
 asdf global nodejs 6.9.2
 npm install esprima -g
+npm install marked -g
+npm install uuid -g
+npm install minimatch -g
 
 echo "OKAY - GOING TO INSTALL OUR OWN THINGS NOW"
 
 echo "--- INSTALLING WEB API ---"
 cd /vagrant
-git clone https://github.com/FarmBot/Farmbot-Web-API farmbot-web-app
+git clone https://github.com/RickCarlino/Farmbot-Web-API farmbot-web-app
 cd farmbot-web-app
 gem install bundler
 bundle install
