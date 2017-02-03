@@ -24,7 +24,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision :shell, path: "scripts/bootstrap.sh", privileged: false
 
-  config.trigger.after :up do
-    run_remote "bash /vagrant/scripts/startup.sh"
+  #config.trigger.after :up do
+    #run_remote "bash /vagrant/scripts/startup.sh"
   end
 end
